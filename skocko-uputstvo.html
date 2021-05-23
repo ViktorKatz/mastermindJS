@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <title>Skočko - postavka igre</title>
+  <script src="code.js"></script>
+</head>
+
+<body>
+
+<div class="centered-container">
+	<h1>Uputstva</h1>
+	<p>Игру играју два играча.Сваки играч треба да погоди комбинацију од четири знака задату од стране другог играча. Играчи имају по седам покушаја да погоде тражену комбинацију. За сваки покушај, играч добија информацију о томе колико знакова је тачно погођено и на одговарајућој позицији, а колико знакова је тачно погођено, али није на одговарајућој позицији. Играчи на располагању имају по 60 секунди за погађање комбинације.</p>
+	<form name="pristanakNaPravila" action="skocko-podesavanja.html" >
+	
+		<input type="checkbox" name="prviUpoznat" id="prviUpoznat" required>
+		<label for="prviUpoznat">Upoznat sam sa pravilima igre. (Igrac 1)</label>
+		<br>
+		<input type="checkbox" name="drugiUpoznat" id="drugiUpoznat" required>
+		<label for= "drugiUpoznat">Upoznat sam sa pravilima igre. (Igrac 2)</label>
+		<br>
+		<input class="centered" type="submit" value="Postavka igre"/>
+	</form>
+
+</div>
+
+</body>

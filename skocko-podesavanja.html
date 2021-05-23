@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <title>Skočko - uputstva</title>
+  <script src="code.js"></script>
+  <script src="podesavanja.js"></script>
+</head>
+
+<body onload="initiate()">
+
+<div class="centered-container">
+	
+	<div class="halfscreen p1side">
+		<h1>Igrač 1</h1>
+		<h2>Postavi kombinaciju!</h2>
+	
+		<div class="boxrow">
+			<div class="box big" onclick="boxClicked(this)">			</div>
+			<div class="box big" onclick="boxClicked(this)">			</div>
+			<div class="box big" onclick="boxClicked(this)">			</div>
+			<div class="box big" onclick="boxClicked(this)">			</div>
+		</div>
+		<div class="boxrow">
+			<div class="box small" onclick="boxClicked(this)">
+				<img class="suit snail" src="skocko-dodatno/snail.png">
+			</div>
+			<div class="box small" onclick="boxClicked(this)">
+				<img class="suit spade" src="skocko-dodatno/spade.png">
+			</div>
+			<div class="box small" onclick="boxClicked(this)">
+				<img class="suit club" src="skocko-dodatno/club.png">
+			</div>
+			<div class="box small" onclick="boxClicked(this)">
+				<img class="suit diamond" src="skocko-dodatno/diamond.png">
+			</div>
+			<div class="box small" onclick="boxClicked(this)">
+				<img class="suit heart" src="skocko-dodatno/heart.png">
+			</div>
+			<div class="box small" onclick="boxClicked(this)">
+				<img class="suit cactus" src="skocko-dodatno/cactus.png">
+			</div>
+		</div>
+		<div class="boxrow">
+			<div class="box button" onclick="obrisiSve(this)">Obriši sve</div>
+			<div class="box button" onclick="potvrdi(this)">Potvrdi</div>
+		</div>
+		<div>
+			<img class="check hidden" src="skocko-dodatno/check.svg">
+		</div>
+	</div>
+	
+	
+	<div class="halfscreen p2side">
+		<h1>Igrač 2</h1>
+			<h2>Postavi kombinaciju!</h2>
+		
+			<div class="boxrow">
+				<div class="box big" onclick="boxClicked(this)">			</div>
+				<div class="box big" onclick="boxClicked(this)">			</div>
+				<div class="box big" onclick="boxClicked(this)">			</div>
+				<div class="box big" onclick="boxClicked(this)">			</div>
+			</div>
+			<div class="boxrow">
+				<div class="box small" onclick="boxClicked(this)">
+					<img class="suit snail" src="skocko-dodatno/snail.png">
+				</div>
+				<div class="box small" onclick="boxClicked(this)">
+					<img class="suit spade" src="skocko-dodatno/spade.png">
+				</div>
+				<div class="box small" onclick="boxClicked(this)">
+					<img class="suit club" src="skocko-dodatno/club.png">
+				</div>
+				<div class="box small" onclick="boxClicked(this)">
+					<img class="suit diamond" src="skocko-dodatno/diamond.png">
+				</div>
+				<div class="box small" onclick="boxClicked(this)">
+					<img class="suit heart" src="skocko-dodatno/heart.png">
+				</div>
+				<div class="box small" onclick="boxClicked(this)">
+					<img class="suit cactus" src="skocko-dodatno/cactus.png">
+				</div>
+			</div>
+			<div class="boxrow">
+				<div class="box button" onclick="obrisiSve(this)">Obriši sve</div>
+				<div class="box button" onclick="potvrdi(this)">Potvrdi</div>
+			</div>
+			<div>
+				<img class="check hidden" src="skocko-dodatno/check.svg">
+			</div>
+	</div>
+
+</div>
+
+
+
+</body>
