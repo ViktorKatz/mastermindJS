@@ -128,6 +128,14 @@ form, form .centered{
 	font-size:18pt;
 }
 
+.box.correct{
+	background-color: rgba(250,30,30,1) !important;
+}
+
+.box.almostcorrect{
+	background-color: rgba(250,250,30,1) !important;
+}
+
 .hidden{
 	display: none;
 }
@@ -163,5 +171,3 @@ img.questionMark{
 .timer{
 	font-size:28px;
 }
-
-

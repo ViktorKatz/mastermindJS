@@ -1,10 +1,11 @@
 var suitBoxTag = "smaller"
 var fieldBoxTag = "medium"
 
-var p1comb = "";
-var p2comb = "";
+var combinations = ["", "", ""];
 
 var currentTurn = 1;
+
+var gameOver = false;
 
 function tick(){
 	var turn = currentTurn;
@@ -13,18 +14,20 @@ function tick(){
 	
 	currentTimer.innerHTML = currentTimer.innerHTML-1;
 	
-	if(currentTimer.innerHTML==0){
+	if(gameOver || currentTimer.innerHTML==0){
 		alert("Isteklo je vreme igraču " + turn + ".\nPobedio je igrač " + (3-turn) + "!");
+		gameOver = true;
 		window.location.href = "skocko-uputstvo.html";
 	}
 }
 
 function initiate(){
-	p1comb = sessionStorage.getItem("player1combination");
-	p2comb = sessionStorage.getItem("player2combination");
+	combinations[1] = sessionStorage.getItem("player1combination");
+	combinations[2] = sessionStorage.getItem("player2combination");
 	
-	if(p1comb==null || p2comb==null){
-		console.log("Nisu podesene kombinacije. Vracam na postavku.")
+	if(combinations[1]==null || combinations[2]==null){
+		console.log("Nisu podesene kombinacije. Vracam na podesavanja.");
+		window.location.href = "skocko-podesavanja.html";
 	}
 	
 	setInterval(tick, 1000);
@@ -131,14 +134,14 @@ function attempt(questionMarkElement){
 		combinationString+=suitInside(fields[i]);
 	}
 	
-	var similarities = similarity(combinationString, "1222");
+	var similarities = similarity(combinationString, combinations[3-currentTurn]);
 	
 	var feedbackBoxes = document.querySelectorAll(".current > .boxrow25.hidden > .box.tiny");
 	
 	console.log("Similarities = " + similarities);
 	
 	for(let i = 0; i < similarities[0]+similarities[1]; ++i){
-		feedbackBoxes[i].innerHTML = i < similarities[0] ? "R" : "Y";
+		feedbackBoxes[i].classList.add( i < similarities[0] ? "correct" : "almostcorrect");
 	}
 	
 	var questionMarkRow = questionMarkElement.closest(".boxrow25");
@@ -150,6 +153,7 @@ function attempt(questionMarkElement){
 	// If the game is over, display message
 	if(similarities[0] == 4){
 		alert("Pobedio je igrač "+ side +"!");
+		gameOver = true;
 		window.location.href = "skocko-uputstvo.html";
 	}
 	

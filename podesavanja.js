@@ -40,7 +40,7 @@ function potvrdi(boxClicked){
 	sessionStorage.setItem("player"+side+"combination", combination);
 	
 	if(sessionStorage.getItem("player1combination") && sessionStorage.getItem("player2combination")){
-		alert("Opaa!");
+		window.location.href = "skocko-igra.html";
 	}
 	
 	var boxes = document.getElementsByClassName("box");
@@ -59,18 +59,3 @@ function potvrdi(boxClicked){
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
