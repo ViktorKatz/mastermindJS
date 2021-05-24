@@ -6,6 +6,19 @@ var p2comb = "";
 
 var currentTurn = 1;
 
+function tick(){
+	var turn = currentTurn;
+	var bothTimers = document.querySelectorAll(".timer");
+	var currentTimer = bothTimers[turn - 1];
+	
+	currentTimer.innerHTML = currentTimer.innerHTML-1;
+	
+	if(currentTimer.innerHTML==0){
+		alert("Isteklo je vreme igraču " + turn + ".\nPobedio je igrač " + (3-turn) + "!");
+		window.location.href = "skocko-uputstvo.html";
+	}
+}
+
 function initiate(){
 	p1comb = sessionStorage.getItem("player1combination");
 	p2comb = sessionStorage.getItem("player2combination");
@@ -13,6 +26,8 @@ function initiate(){
 	if(p1comb==null || p2comb==null){
 		console.log("Nisu podesene kombinacije. Vracam na postavku.")
 	}
+	
+	setInterval(tick, 1000);
 }
 
 function similarity(source, target){
