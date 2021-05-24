@@ -11,11 +11,28 @@ function obrisiSve(boxClicked){
 	
 	var allBigBoxes = document.getElementsByClassName(fieldBoxTag);
 	
+	var alreadySelectedFirst = false;
+	
 	for(let i = 0; i<allBigBoxes.length; ++i){
 		if(playerWhoOwns(allBigBoxes[i])==side){
 			allBigBoxes[i].innerHTML="";
+			allBigBoxes[i].classList.remove(selectedTag[side]);
+			
+			//Place selection on the first box belonging to the deleting player
+			if(!alreadySelectedFirst){
+				allBigBoxes[i].classList.add(selectedTag[side]);
+				alreadySelectedFirst = true;
+			}
 		}
 	}
+	
+	var allSmallBoxes = document.getElementsByClassName(suitBoxTag);
+	for(let i = 0; i<allSmallBoxes.length; ++i){
+		if(playerWhoOwns(allSmallBoxes[i])==side){
+			allSmallBoxes[i].classList.remove(selectedTag[side]);
+		}
+	}
+	
 }
 
 function potvrdi(boxClicked){

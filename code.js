@@ -57,9 +57,9 @@ function boxClicked(box){
 	var fieldBox = selectedBox.classList.contains(suitBoxTag) ? box : selectedBox;
 	
 	fieldBox.innerHTML = suitBox.innerHTML;
-	
-	// If it's not the last box, move the cursor
-	if(fieldBox.nextElementSibling!=null)
+		
+	// If there is a following box and it is empty, move the cursor to it
+	if(fieldBox.nextElementSibling!=null && fieldBox.nextElementSibling.innerHTML.trim()=="")
 		fieldBox.nextElementSibling.classList.add(selectedTag[side]);
 }
 
