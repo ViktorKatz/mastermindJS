@@ -3,6 +3,19 @@ var selectedTag = ["", "p1selected", "p2selected"]
 
 var suitTags=["emptySuit", "snail", "spade", "club", "diamond", "heart", "cactus"];
 
+function removeAllSelected(){
+	var allSelected1 = document.getElementsByClassName(selectedTag[1]);
+	var allSelected2 = document.getElementsByClassName(selectedTag[2]);
+
+	for(let i = 0; i<allSelected1.length; ++i){
+		allSelected1[i].classList.remove(selectedTag[1]);
+	}
+	
+	for(let i = 0; i<allSelected2.length; ++i){
+		allSelected2[i].classList.remove(selectedTag[2]);
+	}
+}
+
 function suitInside(box){
 	for(let i = 1; i<=6; ++i){
 		var regex = new RegExp(suitTags[i]);

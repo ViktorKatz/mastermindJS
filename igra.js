@@ -13,8 +13,10 @@ function tick(){
 	var currentTimer = bothTimers[turn - 1];
 	
 	currentTimer.innerHTML = currentTimer.innerHTML-1;
+	var bgc = "rgba("+ (100+(200 - currentTimer.innerHTML*200/60)) +","+ (50+(currentTimer.innerHTML*250/60)) +",0,1)";
+	currentTimer.parentElement.style.backgroundColor = bgc;
 	
-	if(gameOver || currentTimer.innerHTML==0){
+	if(!gameOver && currentTimer.innerHTML==0){
 		alert("Isteklo je vreme igraču " + turn + ".\nPobedio je igrač " + (3-turn) + "!");
 		gameOver = true;
 		window.location.href = "skocko-uputstvo.html";
@@ -79,9 +81,6 @@ function advanceCurrentRow(){
 	var mySideTag = sideTag[currentTurn];
 	var opposingSideTag = sideTag[3 - currentTurn];
 	
-	console.log(mySideTag);
-	console.log(opposingSideTag);
-	
 	var allMyRows = document.querySelectorAll(mySideTag + " > .boxrow.compact");
 	var allOpposingRows = document.querySelectorAll(opposingSideTag + " > .boxrow.compact");
 	
@@ -93,6 +92,14 @@ function advanceCurrentRow(){
 			// If player 2 played their move, then player 1 plays in the lower row.
 			var nextRowNumber = currentTurn == 1 ? i : i + 1;
 			allMyRows[i].classList.remove("current");
+			
+			// If there are no more attempts remaining, the game is over
+			if(nextRowNumber >= 7){
+				gameOver = true;
+				alert("Nijedan igrač nije uspeo da pogodi kombinaciju :(");
+				window.location.href = "skocko-uputstvo.html";
+			}
+			
 			allOpposingRows[nextRowNumber].classList.add("current");
 			break;
 		}
@@ -103,6 +110,9 @@ function advanceCurrentRow(){
 	for(let i = 0; i < activeBoxes.length; ++i){
 		inactiveBoxes[i].classList.remove("inactive");
 	}
+	
+	// And set the opponent's first box as selected for easier input
+	inactiveBoxes[0].classList.add(selectedTag[3 - currentTurn]);
 }
 
 function attempt(questionMarkElement){
@@ -133,6 +143,8 @@ function attempt(questionMarkElement){
 		}
 		combinationString+=suitInside(fields[i]);
 	}
+	
+	removeAllSelected();
 	
 	var similarities = similarity(combinationString, combinations[3-currentTurn]);
 	
