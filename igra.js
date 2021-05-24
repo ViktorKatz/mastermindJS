@@ -4,7 +4,7 @@ var fieldBoxTag = "medium"
 var p1comb = "";
 var p2comb = "";
 
-var currentTurn = 2;
+var currentTurn = 1;
 
 function initiate(){
 	p1comb = sessionStorage.getItem("player1combination");
@@ -47,6 +47,46 @@ function similarity(source, target){
 	return toReturn;
 }
 
+// Advances the cursor after a move has been made.
+// Cursor is marked by the class current.
+function advanceCurrentRow(){
+	var currentRow = document.querySelector(".current");
+	
+	// First, deactivate all the field boxes
+	var activeBoxes = document.querySelectorAll(".current > .boxrow75 > .box");
+	for(let i = 0; i < activeBoxes.length; ++i){
+		activeBoxes[i].classList.add("inactive");
+	}
+	
+	var mySideTag = sideTag[currentTurn];
+	var opposingSideTag = sideTag[3 - currentTurn];
+	
+	console.log(mySideTag);
+	console.log(opposingSideTag);
+	
+	var allMyRows = document.querySelectorAll(mySideTag + " > .boxrow.compact");
+	var allOpposingRows = document.querySelectorAll(opposingSideTag + " > .boxrow.compact");
+	
+	// Zero indexed, find current row
+	for(let i = 0; i<allMyRows.length; ++i){
+		if(allMyRows[i].classList.contains("current")){
+			
+			// If player 1 played their move, then player 2 plays in the same row.
+			// If player 2 played their move, then player 1 plays in the lower row.
+			var nextRowNumber = currentTurn == 1 ? i : i + 1;
+			allMyRows[i].classList.remove("current");
+			allOpposingRows[nextRowNumber].classList.add("current");
+			break;
+		}
+	}
+	
+	// Now, activate all the field boxes of the new current row
+	var inactiveBoxes = document.querySelectorAll(".current > .boxrow75 > .box");
+	for(let i = 0; i < activeBoxes.length; ++i){
+		inactiveBoxes[i].classList.remove("inactive");
+	}
+}
+
 function attempt(questionMarkElement){
 	var side = playerWhoOwns(questionMarkElement);	
 	
@@ -80,22 +120,28 @@ function attempt(questionMarkElement){
 	
 	var feedbackBoxes = document.querySelectorAll(".current > .boxrow25.hidden > .box.tiny");
 	
-	feedbackBoxes = feedbackBoxes.filter(b => playerWhoOwns(b)==side);
-	
-	console.log(similarities);
+	console.log("Similarities = " + similarities);
 	
 	for(let i = 0; i < similarities[0]+similarities[1]; ++i){
-		if(playerWhoOwns(feedbackBoxes[i])!=side){
-			continue;
-		}
 		feedbackBoxes[i].innerHTML = i < similarities[0] ? "R" : "Y";
 	}
 	
 	var questionMarkRow = questionMarkElement.closest(".boxrow25");
-	var feedbackRow = document.querySelectorAll(".current > .boxrow25.hidden");
+	var feedbackRow = document.querySelector(".current > .boxrow25.hidden");
 	
 	questionMarkRow.classList.add("hidden");
-	feedbackRow[side-1].classList.remove("hidden");
+	feedbackRow.classList.remove("hidden");
+	
+	// If the game is over, display message
+	if(similarities[0] == 4){
+		alert("Pobedio je igrač "+ side +"!");
+		window.location.href = "skocko-uputstvo.html";
+	}
+	
+	// Move cursor to the next player
+	advanceCurrentRow();
+	
+	currentTurn = 3 - currentTurn;
 }
 
 
